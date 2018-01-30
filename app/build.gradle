@@ -9,6 +9,12 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ eventBusIndex : 'com.test.eventbustest.MyEventBusIndex' ]
+            }
+        }
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -27,5 +33,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'org.greenrobot:eventbus:3.0.0'
+    annotationProcessor  'org.greenrobot:eventbus-annotation-processor:3.0.1'
     testCompile 'junit:junit:4.12'
 }

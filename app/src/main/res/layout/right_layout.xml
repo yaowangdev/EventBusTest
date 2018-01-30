@@ -1,15 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/tv_right"
+    <Button
+        android:id="@+id/btn1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:background="@color/colorAccent"
-        android:textSize="30sp"
+        android:layout_height="wrap_content"
+        android:text="发送消息1"
         />
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="发送消息2"
+        />
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="发送消息3"
+        />
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        />
+    <Button
+        android:id="@+id/btn5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="解除注册"
+        />
+    <TextView
+        android:id="@+id/tv_100"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="priority100"
+        />
+    <TextView
+        android:id="@+id/tv_80"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="priority80"
+        />
+    <TextView
+        android:id="@+id/tv_60"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="priority60"
+        />
+
 
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -17,13 +18,19 @@ import org.greenrobot.eventbus.ThreadMode;
  * Created by Administrator on 2018/1/28 0028.
  */
 
-public class RightFragment extends Fragment {
+public class RightFragment extends Fragment implements View.OnClickListener {
     private TextView tv;
+    private Button btn1,btn2,btn3,btn4,btn5;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        long l1 = System.currentTimeMillis();
+        Log.d("registEffic",l1+"");
         EventBus.getDefault().register(this);
+        long l2 = System.currentTimeMillis();
+        Log.d("registEffic",l2+"");
+        Log.d("registEffic",l2-l1+"");
     }
 
     @Nullable
@@ -34,7 +41,16 @@ public class RightFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        tv = view.findViewById(R.id.tv_right);
+        btn1 = view.findViewById(R.id.btn1);
+        btn2 = view.findViewById(R.id.btn2);
+        btn3 = view.findViewById(R.id.btn3);
+        btn4 = view.findViewById(R.id.btn4);
+        btn5 = view.findViewById(R.id.btn5);
+        btn1.setOnClickListener(this);
+        btn2.setOnClickListener(this);
+        btn3.setOnClickListener(this);
+        btn4.setOnClickListener(this);
+        btn5.setOnClickListener(this);
     }
 
     //处理事件的线程与事件来源的线程一致
@@ -69,5 +85,42 @@ public class RightFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn1:
+                EventBus.getDefault().postSticky(new MyEvent2("消息1"));
+                break;
+            case R.id.btn2:
+                EventBus.getDefault().postSticky(new MyEvent2("消息2"));
+                break;
+            case R.id.btn3:
+                EventBus.getDefault().postSticky(new MyEvent2("消息3"));
+                break;
+            case R.id.btn4:
+                EventBus.getDefault().register(this);//不能注册2次
+                break;
+            case R.id.btn5:
+                EventBus.getDefault().unregister(this);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN,priority = 80)
+    public void getEvent(MyEvent2 event2){
+        Log.d("getEvent","getEvent=>"+event2.getMsg());
+    }
+
+    @Subscribe(threadMode = ThreadMode.POSTING,priority = 90)
+    public void getEvent2(MyEvent2 event2){
+        Log.d("getEvent","getEvent2="+event2.getMsg());
+//        EventBus.getDefault().cancelEventDelivery(event2);
+        EventBus.getDefault().cancelEventDelivery(event2);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN,priority = 60)
+    public void getEvent3(MyEvent2 event2){
+        Log.d("getEvent","getEvent3="+event2.getMsg());
     }
 }
